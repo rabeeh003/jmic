@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JMIC</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS for Navbar -->
+    <style>
+        .navbar-custom {
+            z-index: 10;
+            background-color: #2d85f8;
+        }
+    </style>
+    <style>
+        /* Basic Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .home {
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh;
+            position: relative;
+            height: 100%;
+        }
+
+        header {
+            background-color: #0783e3;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            height: 100%;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background-color: #333;
+            display: block;
+            color: #fff;
+            padding: 20px;
+            width: 300px;
+            transition: left 0.3s ease-in-out;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* User Listing Styles */
+        .user-list {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .user-list th,
+        .user-list td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .user-list th {
+            background-color: #f2f2f2;
+        }
+
+        .user-list tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Buttons Styles */
+        .btn {
+            background-color: #0783e3;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .togle-btn {
+            display: none;
+        }
+
+        /* Search Styles */
+        .search {
+            margin-bottom: 20px;
+        }
+
+        .search input[type="text"] {
+            width: 100%;
+            padding: 10px;
+        }
+
+        @media screen and (max-width: 1300px) {
+            .togle-btn {
+                display: block;
+            }
+
+            .sidebar {
+                display: none;
+                position: absolute;
+                height: 100%;
+                top: 10;
+                left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container d-block d-lg-flex">
+            <div class="w-100 d-inline-flex justify-content-between">
+                <a class="navbar-brand" style="color: azure;" href="#"><b>Batch : B1-2014</b></a>
+                <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" style="color: azure;" href="{% url 'index' %}">Home</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" style="color: azure;" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- Your content goes here -->
+    {% block datalist %}
+    {% endblock datalist %}
+
+    
+    {% block script %}
+    {% endblock script %}
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

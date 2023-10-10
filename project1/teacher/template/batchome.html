@@ -1,1 +1,97 @@
-<h1>welcome to batchome</h1>
+{% extends 'batchbase.html' %}
+
+
+{% block datalist %}
+<div class="container-fluid home">
+    <header class="row d-flex justify-content-between align-items-center navbar-dark">
+        <span class="h1 w-auto">User Management</span>
+        <button class="btn w-auto togle-btn" onclick="toggleSidebar()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </header>
+    <div class="content row flex-md-row-reverse">
+        <div class="col-12 col-md-5 search">
+            <div>
+                <form class="d-inline-flex w-100" action="" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="search" placeholder="Search...">
+                    <button class="btn" type="submit">Search</button>
+                </form>
+            </div>
+            {% if se %}
+            <table class="user-list">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in se%}
+                    <tr>
+                        <td>{{u.id}}</td>
+                        <td>{{u.user_name}}</td>
+                        <td>{{u.user_mail}}</td>
+                        <td>
+                            <button class="btn" id="{{u.id}}">Edit</button>
+                            <button class="btn" id="{{u.id}}">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor%}
+
+                    <!-- Add more user rows here -->
+                </tbody>
+            </table>
+            {% endif%}
+        </div>
+        <div class="col ">
+            <table class="user-list">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in us%}
+                    <tr>
+                        <td>{{u.id}}</td>
+                        <td>{{u.user_name}}</td>
+                        <td>{{u.user_mail}}</td>
+                        <td>
+                            <button class="btn" id="{{u.id}}">Edit</button>
+                            <button class="btn" id="{{u.id}}">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor%}
+
+                    <!-- Add more user rows here -->
+                </tbody>
+            </table>
+        </div>
+        <div class="sidebar col-2 col-md-12" id="sidebar">
+            <a href="#">Home</a>
+            <a href="#">Add User</a>
+            <!-- Add more sidebar links here -->
+        </div>
+    </div>
+</div>
+{% endblock datalist %}
+
+
+{% block script %}
+<script>
+    function toggleSidebar() {
+        var dis = document.getElementById('sidebar');
+        if (dis.style.display === "none") {
+            dis.style.display = "block";
+        } else {
+            dis.style.display = "none";
+        }
+    }
+</script>
+{% endblock script %}

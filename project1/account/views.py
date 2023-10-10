@@ -4,13 +4,6 @@ from .models import user_accounts,admin_accounts
 # Create your views here.
 
 def index(request):
-    # username = request.session.get('username')
-    # user_type = request.session.get('type')
-
-    # if username and user_type == 'std':
-    #     return redirect('student')
-    # if username and user_type == 'batch':
-    #     return redirect('batchome') 
     return render(request,'index.html')
 
 def log_in(request):
@@ -63,23 +56,23 @@ def batch(request):
         upass = request.POST['password']
         try:
             user = admin_accounts.objects.get(admin_name=uname, admin_pass=upass)
-            request.session['admin'] = uname
+            request.session['admin'] = 'admin'
             request.session['batch'] = 'batch'
-            return redirect('batchome')
-        except user_accounts.DoesNotExist:
+            return redirect("batchome")
+        except:
             error_message = 'Incorrect username or password'
-            return render(request,'login.html', {'error_message': error_message})
+            return render(request,'batch.html', {'error_message': error_message})
         
     username = request.session.get('admin')
     user_type = request.session.get('batch')
 
     if username and user_type == 'batch':
-        return redirect('batchome') 
+        return redirect("batchome") 
     
     return render(request,'batch.html')
 
 
 def log_out(request):
-    if 'username' in request.session:
+    if 'username' or 'admin' in request.session:
         request.session.flush()
     return redirect(index)
