@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect
-from django.db import IntegrityError
 from .models import user_accounts,admin_accounts
 # Create your views here.
 
@@ -37,8 +36,8 @@ def sign_up(request):
 
         try:
             data.save()
-        except IntegrityError as e:
-            error_message='Username alrady existed'
+        except:
+            error_message='Username or mail alrady existed'
             return render(request,'signup.html',{"error_message":error_message})
         return redirect(log_in)
     

@@ -10,42 +10,7 @@
         </button>
     </header>
     <div class="content row flex-md-row-reverse">
-        <div class="col-12 col-md-5 search">
-            <div>
-                <form class="d-inline-flex w-100" action="" method="post">
-                    {% csrf_token %}
-                    <input type="text" name="search" placeholder="Search...">
-                    <button class="btn" type="submit">Search</button>
-                </form>
-            </div>
-            {% if se %}
-            <table class="user-list">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for u in se%}
-                    <tr>
-                        <td>{{u.id}}</td>
-                        <td>{{u.user_name}}</td>
-                        <td>{{u.user_mail}}</td>
-                        <td>
-                            <button class="btn" id="{{u.id}}">Edit</button>
-                            <button class="btn" id="{{u.id}}">Delete</button>
-                        </td>
-                    </tr>
-                    {% endfor%}
-
-                    <!-- Add more user rows here -->
-                </tbody>
-            </table>
-            {% endif%}
-        </div>
+        
         <div class="col ">
             <table class="user-list">
                 <thead>
@@ -62,9 +27,41 @@
                         <td>{{u.id}}</td>
                         <td>{{u.user_name}}</td>
                         <td>{{u.user_mail}}</td>
-                        <td>
-                            <button class="btn" id="{{u.id}}">Edit</button>
-                            <button class="btn" id="{{u.id}}">Delete</button>
+                        <td class="d-flex justify-content-around">
+                            <a class="" style="border: none; padding: 2px;" href="{% url 'edit' u.id %}" id="{{u.id}}">
+                                <i class="fa fa-pencil-alt"></i>
+                            </a>
+                            <!-- <form action="" method="post">
+                                {% csrf_token %}
+                            </form> -->
+                            <!-- <a class="btn" href="{% url 'del' u.id %}" id="{{u.id}}">Delete</a> -->
+                            <a type="button" class="" style="border: none; padding: 2px;" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                <i class="fa fa-trash"></i>
+                            </a>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Delete your data in database. cannot recovery the deleted data's
+                                        </div>
+                                        <form action="{% url 'del' pk=u.id %}" class="modal-footer" method="post">
+                                            {% csrf_token %}
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-danger">Delete</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     {% endfor%}
@@ -75,7 +72,7 @@
         </div>
         <div class="sidebar col-2 col-md-12" id="sidebar">
             <a href="#">Home</a>
-            <a href="#">Add User</a>
+            <a href="{% url 'addstu' %}">Add User</a>
             <!-- Add more sidebar links here -->
         </div>
     </div>

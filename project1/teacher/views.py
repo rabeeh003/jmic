@@ -1,5 +1,5 @@
-from django.shortcuts import render,redirect
-# from django.views.generic import TemplateView, ListView, DeleteView
+from django.shortcuts import render,redirect,get_object_or_404
+from django.contrib import messages
 from account.models import user_accounts
 
 # Create your views here.
@@ -9,24 +9,64 @@ def batchome(request):
 
     if username and user_type == 'batch':
         us = user_accounts.objects.all() 
-        return render(request,'batchome.html',{'us':us}) 
+        return render(request,'batchome.html',{'us':us})
+    
     
     return redirect('batch')
 
-# def search(request):
-#     if request.method == 'POST':
-#         search_term = request.POST.get('search')
-#         if search_term:
-#             # Use Q objects for complex queries
-#             results = user_accounts.objects.filter(
-#                 Q(user_name__icontains=search_term)
-#             )
-#             return render(request, 'batchome.html', {'us': results})
-#     return redirect(batchome)
+def batchedit(request, pk):
+    username = request.session.get('admin')
+    user_type = request.session.get('batch')
 
-# class std(TemplateView):
-#     context_object_name = 'stdetail'
-#     template_name = "batchedit.html"
-#     model = user_accounts
+    if username and user_type == 'batch':
+        us = get_object_or_404(user_accounts, id=pk)
+        if request.POST:
+            new_name = request.POST.get('name')
+            new_email = request.POST.get('email')
+            new_password = request.POST.get('password')
+            
+            c = 0
+
+            if new_name != us.user_name:
+                us.user_name = new_name
+                c += 1
+            if new_email != us.user_mail:
+                us.user_mail = new_email
+                c += 1
+            if new_password != us.user_pass:
+                us.user_pass = new_password
+                c += 1
+            
+            if c != 0:
+                us.save()
+            
+            # return redirect(batchome)
+        return render(request,'batcheditpage.html',{'us':us}) 
+    
+    return redirect('batch')
+
+def deleteobj(request, pk):
+    us = get_object_or_404(user_accounts, id=pk)
+    if request.method == 'POST':
+        us.delete()
+        return redirect('batchome')
+    return redirect('batchome')
+
+def addstu(request):
+    if request.POST:
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        data = user_accounts(user_name=name,user_mail=email, user_pass=password)
+        try:
+            data.save()
+            messages.success(request, 'Your success message goes here.')
+        except:
+            error_message='Username or mail alrady existed'
+            return render(request,'addstudent.html',{"error_message":error_message})
+        return render(request,'addstudent.html')
+        
+    return render(request,'addstudent.html')
+
     
     

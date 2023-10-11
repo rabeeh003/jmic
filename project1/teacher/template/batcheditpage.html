@@ -2,6 +2,44 @@
 
 
 {% block datalist %}
-    
+
+<div class="container-fluid home">
+    <header class="row d-flex justify-content-between align-items-center navbar-dark">
+        <span class="h1 w-auto">User Management</span>
+        <button class="btn w-auto togle-btn" onclick="toggleSidebar()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </header>
+    <div class="container mt-4">
+        <h1>Edit User Information</h1>
+
+        <!-- User Edit Form -->
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <!-- Name Field -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ us.user_name }}" required>
+            </div>
+            
+            <!-- Email Field -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ us.user_mail }}" required>
+            </div>
+            
+            <!-- Password Field (optional) -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" value="{{ us.user_pass }}">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+
+        <!-- Cancel Button (link to go back) -->
+    </div>
+</div>
 {% endblock datalist %}
-    
