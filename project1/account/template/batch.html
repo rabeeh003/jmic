@@ -148,11 +148,11 @@
                 {% csrf_token %}
                 <div class="row">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Username" name="username" required>
+                    <input type="text" placeholder="Teacher Id" name="teacherid" required>
                 </div>
                 <div class="row">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Password" name="password" required>
+                    <input type="text" name="dob" pattern="\d{4}-\d{2}-\d{2}" value="yyyy-mm-dd" style="color: gray;" required>
                     {% if error_message %}
                     <p style="font-size: 15px;color: red;">{{ error_message }}</p>
                     {% endif %}

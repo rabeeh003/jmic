@@ -159,35 +159,43 @@
         <form action="" method="post">
             {% csrf_token %}
             <div class="field">
-                <input type="text" name="username" required>
+                <input type="text" name="studentid" required>
                 <span class="fas fa-user"></span>
-                <label>Username</label>
+                <label>Student Id</label>
             </div>
-            {% if error_message %}
-            <p style="font-size: 15px;color: red;">{{ error_message }}</p>
-            {% endif %}
+             <div class="field">
+                <input type="text" name="name" required>
+                <span class="fas fa-user-circle"></span>
+                <label>Full name</label>
+            </div>
+            <div class="field">
+                <input type="text" name="dob" pattern="\d{4}-\d{2}-\d{2}" value="yyyy-mm-dd" required>
+                <span class="fas fa-calendar"></span>
+                <label></label>
+            </div>
+            <div class="field">
+                <input type="number" maxlength="2" max="3" name="batch" required>
+                <span class="fas fa-layer-group"></span>
+                <label>Batch</label>
+            </div>
+            <div class="field">
+                <input type="number" name="phone" max="9999999999" required>
+                <span class="fas fa-phone"></span>
+                <label>Phone</label>
+            </div>
             <div class="field">
                 <input type="email" name="mail" required>
                 <span class="fas fa-mail-bulk"></span>
                 <label>Email</label>
-             </div>
-            <div class="field">
-                <input type="password" name="password" required>
-                <span class="fas fa-lock"></span>
-                <label>Password</label>
             </div>
-            <!-- <div>
-                <select name="plan" id="plan" style="background:none; border: rgb(125, 125, 125);" class="field">
-                    <option value="none" selected>
-                        Student
-                    </option>
-                    <option value="free">Teacher</option>
-                </select>
-            </div> -->
+
+            {% if error_message %}
+            <p style="font-size: 15px;color: red;">{{ error_message }}</p>
+            {% endif %}
             <div class="forgot-pass">
                 <a href="#">Forgot Password?</a>
             </div>
-            <button>Sign in</button>
+            <button>Sign up</button>
             <div class="sign-up">
                 alrady signed?
                 <a href="{% url 'login' %}">login now</a>

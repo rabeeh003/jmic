@@ -158,14 +158,14 @@
     <form action="" method="post">
       {% csrf_token %}
       <div class="field">
-        <input type="text" name="username" required>
+        <input type="text" name="studentid" required>
         <span class="fas fa-user"></span>
-        <label>Username</label>
+        <label>Student id</label>
       </div>
       <div class="field">
-        <input type="password" name="password" required>
+        <input type="text" name="dob" pattern="\d{4}-\d{2}-\d{2}" value="yyyy-mm-dd" required>
         <span class="fas fa-lock"></span>
-        <label>Password</label><br>
+        <label></label><br>
       </div>
       <!-- <div >
         <select name="plan" id="plan" style="background:none; border: rgb(125, 125, 125);" class="field" >

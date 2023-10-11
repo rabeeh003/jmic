@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
-from account.models import user_accounts
+from account.models import user_accounts,Student,Teacher,Batch
 
 # Create your views here.
 def batchome(request):
@@ -8,9 +8,14 @@ def batchome(request):
     user_type = request.session.get('batch')
 
     if username and user_type == 'batch':
-        us = user_accounts.objects.all() 
-        return render(request,'batchome.html',{'us':us})
-    
+        try:
+            cl = Teacher.objects.get(teacherid=username)
+            bt = Batch.objects.get(batch_teacher=cl.id)
+            us = Student.objects.filter(st_batch=bt)
+            return render(request,'batchome.html',{'us':us})
+        except:
+            return render(request,'batchome.html')
+
     
     return redirect('batch')
 
@@ -19,7 +24,7 @@ def batchedit(request, pk):
     user_type = request.session.get('batch')
 
     if username and user_type == 'batch':
-        us = get_object_or_404(user_accounts, id=pk)
+        us = get_object_or_404(Student, id=pk)
         if request.POST:
             new_name = request.POST.get('name')
             new_email = request.POST.get('email')
@@ -46,7 +51,7 @@ def batchedit(request, pk):
     return redirect('batch')
 
 def deleteobj(request, pk):
-    us = get_object_or_404(user_accounts, id=pk)
+    us = get_object_or_404(Student, id=pk)
     if request.method == 'POST':
         us.delete()
         return redirect('batchome')

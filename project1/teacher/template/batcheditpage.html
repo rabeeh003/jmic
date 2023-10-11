@@ -11,16 +11,28 @@
         </button>
     </header>
     <div class="container mt-4">
-        <h1>Edit User Information</h1>
+        <h1>Edit Student Information</h1>
 
         <!-- User Edit Form -->
         <form action="" method="post">
             {% csrf_token %}
 
+            <!-- Id Field -->
+            <div class="mb-3">
+                <label for="studentid" class="form-label">Student Id:</label>
+                <input type="text" disabled class="form-control" id="studentid" name="studentid" value="{{ us.studentid }}" >
+            </div>
+
             <!-- Name Field -->
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ us.user_name }}" required>
+                <input type="text" class="form-control" id="name" name="name" value="{{ us.st_name }}" required>
+            </div>
+
+            <!-- Dob Field -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" name="dob" pattern="\d{4}-\d{2}-\d{2}" value="{{us.st_dob}}" required>
             </div>
             
             <!-- Email Field -->

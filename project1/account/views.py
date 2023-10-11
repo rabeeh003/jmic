@@ -1,20 +1,22 @@
 from django.shortcuts import render,redirect
 from .models import user_accounts,admin_accounts
-# Create your views here.
+from .models import Student,Batch,Teacher
 
+
+# Create your views here.
 def index(request):
     return render(request,'index.html')
 
 def log_in(request):
     if request.POST:
-        uname = request.POST['username']
-        upass = request.POST['password']
+        stid = request.POST['studentid']
+        dob = request.POST['dob']
         try:
-            user = user_accounts.objects.get(user_name=uname, user_pass=upass)
-            request.session['username'] = uname
+            user = Student.objects.get(studentid=stid, st_dob=dob)
+            request.session['username'] = stid
             request.session['std'] = 'std'
             return redirect('student')
-        except user_accounts.DoesNotExist:
+        except:
             error_message = 'Incorrect username or password'
             return render(request,'login.html', {'error_message': error_message})
     
@@ -29,15 +31,18 @@ def log_in(request):
 
 def sign_up(request):
     if request.POST:
-        uname = request.POST['username']
-        umail = request.POST['mail']
-        upass = request.POST['password']
-        data = user_accounts(user_name=uname,user_mail=umail, user_pass=upass)
+        stid = request.POST['studentid']
+        name = request.POST['name']
+        dob = request.POST['dob']
+        batch = Batch.objects.get(batch_no=request.POST['batch'])
+        mail = request.POST['mail']
+        phone = request.POST['phone']
+        data = Student(studentid=stid, st_name=name, st_dob=dob, st_batch=batch, st_mail=mail, st_phone=phone)
 
         try:
             data.save()
         except:
-            error_message='Username or mail alrady existed'
+            error_message='Student id or mail alrady existed'
             return render(request,'signup.html',{"error_message":error_message})
         return redirect(log_in)
     
@@ -51,11 +56,11 @@ def sign_up(request):
 
 def batch(request):
     if request.POST:
-        uname = request.POST['username']
-        upass = request.POST['password']
+        uname = request.POST['teacherid']
+        dob = request.POST['dob']
         try:
-            user = admin_accounts.objects.get(admin_name=uname, admin_pass=upass)
-            request.session['admin'] = 'admin'
+            user = Teacher.objects.get(teacherid=uname, t_dob=dob)
+            request.session['admin'] = uname
             request.session['batch'] = 'batch'
             return redirect("batchome")
         except:
