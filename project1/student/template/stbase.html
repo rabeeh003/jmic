@@ -13,6 +13,105 @@
             
         }
     </style>
+    <style>
+        /* Basic Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .home {
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh;
+            position: relative;
+            height: 100%;
+        }
+
+        header {
+            background-color: #0783e3;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            height: 100%;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background-color: #333;
+            display: block;
+            color: #fff;
+            padding: 20px;
+            width: 300px;
+            transition: left 0.3s ease-in-out;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* User Listing Styles */
+        .user-list {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .user-list th,
+        .user-list td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .user-list th {
+            background-color: #f2f2f2;
+        }
+
+        .user-list tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Buttons Styles */
+        .btn {
+            background-color: #0783e3;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .togle-btn {
+            display: none;
+        }
+
+        @media screen and (max-width: 1300px) {
+            .togle-btn {
+                display: block;
+            }
+
+            .sidebar {
+                display: none;
+                position: absolute;
+                height: 100%;
+                top: 10;
+                left: 0;
+            }
+        }
+    </style>
     {% block style %}
         
     {% endblock style %}
@@ -28,7 +127,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto" >
                     <li class="nav-item active">
-                        <a class="nav-link" style="color: azure;" href="#">Home</a>
+                        <a class="nav-link" style="color: azure;" href="{% url 'index' %}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" style="color: azure;" href="{% url 'logout' %}">Logout</a>

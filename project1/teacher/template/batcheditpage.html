@@ -10,7 +10,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </header>
-    <div class="container mt-4">
+    <div class="container mt-4" >
         <h1>Edit Student Information</h1>
 
         <!-- User Edit Form -->
@@ -26,25 +26,36 @@
             <!-- Name Field -->
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ us.st_name }}" required>
+                <input type="text" class="form-control" id="name" name="name" value="{{ us.st_name }}" >
             </div>
 
             <!-- Dob Field -->
             <div class="mb-3">
-                <label for="name" class="form-label">Name:</label>
-                <input type="text" name="dob" pattern="\d{4}-\d{2}-\d{2}" value="{{us.st_dob}}" required>
+                <label for="dob" class="form-label">Date of birth: {{us.st_dob}}</label><br>
+                <input type="date" name="dob" class="form-control" pattern="\d{4}-\d{2}-\d{2}" value={{us.st_dob}}>
+            </div>
+
+            <!-- Class Field -->
+            <div class="mb-3">
+                <label for="batch" class="form-label">Batch: {{us.st_batch}}</label><br>
+                <select  class="form-control" id="batch" name="batch">
+                    <option selected>{{us.st_batch}}</option>
+                    {% for i in batch %}
+                    <option>{{i.batch_no}}</option>
+                    {% endfor %}
+                  </select>
             </div>
             
             <!-- Email Field -->
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ us.user_mail }}" required>
+                <input type="email" class="form-control" id="email" name="email" value="{{us.st_mail}}">
             </div>
             
             <!-- Password Field (optional) -->
             <div class="mb-3">
-                <label for="password" class="form-label">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" value="{{ us.user_pass }}">
+                <label for="phone" class="form-label">Phone:</label>
+                <input type="number" maxlength="10" class="form-control" id="phone" name="phone" value="{{ us.st_phone }}">
             </div>
 
             <!-- Submit Button -->

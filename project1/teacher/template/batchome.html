@@ -9,15 +9,15 @@
         </button>
     </header>
     <div class="content row flex-md-row-reverse">
-        
-        <div class="col ">
+
+        <div class="col" style="height: 80vh; width: 100vh; overflow-y: scroll;">
             <table class="user-list">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Name</th>
                         <th>Date of Birth</th>
-                        <th>Actions</th>
+                        <th style="width: 50px;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,7 +71,9 @@
         </div>
         <div class="sidebar col-2 col-md-12" id="sidebar">
             <a href="#">Home</a>
-            <a href="{% url 'addstu' %}">Add User</a>
+            <a href="{% url 'marck' %}">Mark</a>
+            <a href="{% url 'addstu' %}">Add Student</a>
+            <a href="{% url 'addmarck' %}">Add Mark</a>
             <!-- Add more sidebar links here -->
         </div>
     </div>

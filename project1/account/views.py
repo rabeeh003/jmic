@@ -25,8 +25,6 @@ def log_in(request):
 
     if username and user_type == 'std':
         return redirect('student')
-    
-    
     return render(request,'login.html')
 
 def sign_up(request):
@@ -38,7 +36,7 @@ def sign_up(request):
         mail = request.POST['mail']
         phone = request.POST['phone']
         data = Student(studentid=stid, st_name=name, st_dob=dob, st_batch=batch, st_mail=mail, st_phone=phone)
-
+        
         try:
             data.save()
         except:
